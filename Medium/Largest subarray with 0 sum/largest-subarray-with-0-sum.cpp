@@ -8,26 +8,34 @@ using namespace std;
 // } Driver Code Ends
 /*You are required to complete this function*/
 
-
 class Solution{
     public:
     int maxLen(vector<int>&A, int n)
     {   
-        unordered_map<int,int> mp;
-        int sum = 0;
-        int ans = 0;
+        unordered_map<int,int>mpp;
+        int sum=0;
+        int longest=0;
         
-        for(int i = 0; i<n; i++){
-            sum += A[i];
-            if(sum == 0)
-                ans = max(ans,i+1);
-            else if(mp.find(sum) == mp.end())
-                mp[sum] = i;
-            else
-                ans = max(ans,i-mp[sum]);
+        for(int i=0;i<n;i++)
+        {
+            sum+=A[i];
+            if(sum==0) longest=i+1;
+            else{
+            if(mpp.find(sum)!=mpp.end())
+            {
+                longest=max(longest,i-mpp[sum]);
+            }
+            else{
+                 mpp[sum]=i;
+                
+            }
+           
+                
+            }
+            
         }
-        
-        return ans;
+        return longest;
+        // Your code here
     }
 };
 
