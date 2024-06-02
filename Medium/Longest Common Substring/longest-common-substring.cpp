@@ -5,33 +5,33 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-    // static int dp[1001][1001];
-   int lcs(string S1, string S2, int n, int m, vector<vector<int>>& dp)
-{
-    int ans = 0;
-    for (int i = 1; i <= n; i++)
+    
+    int longestCommonSubstr (string S1, string S2, int n, int m)
     {
-        for (int j = 1; j <= m; j++)
+        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        for(int i=0;i<n+1;i++)
         {
-            if (S1[i-1] == S2[j-1])
+            dp[i][0]=0;
+            
+        }
+        int ans=0;
+        for(int i=1;i<n+1;i++)
+        {
+            for(int j=1;j<m+1;j++)
             {
-                dp[i][j] = dp[i-1][j-1] + 1;
-                ans = max(ans, dp[i][j]);
-            }
-            else
-            {
-                dp[i][j] = 0;
+                if(S1[i-1]==S2[j-1])
+                {
+                    dp[i][j]=1+dp[i-1][j-1];
+                    ans=max(ans,dp[i][j]);
+                    
+                }
+                else{
+                    dp[i][j]=0;
+                }
             }
         }
+        return ans;
     }
-    return ans;
-}
-
-int longestCommonSubstr(string S1, string S2, int n, int m)
-{
-    vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
-    return lcs(S1, S2, n, m, dp);
-}
 };
 
 //{ Driver Code Starts.
