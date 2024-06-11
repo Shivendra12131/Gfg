@@ -12,8 +12,8 @@ class Solution {
             
             if(!vis[adjacentnode])
             {
-                if(detect(adjacentnode,adj,vis,node)) return true;
-                
+              if(detect(adjacentnode,adj,vis,node)==true) return true;
+               
             }
             else if(parent!=adjacentnode) return true;
         }
