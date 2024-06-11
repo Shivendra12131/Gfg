@@ -5,55 +5,36 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
     private:
-    bool detect(int src,vector<int>adj[],vector<int>&vis)
-    {
-        queue<pair<int,int>>q;
-        vis[src]=1;
-        q.push({src,-1});
-        while(!q.empty())
+    bool detect(int node,vector<int>adj[],vector<int>&vis,int parent){
+        vis[node]=1;
+        for(auto adjacentnode:adj[node])
         {
-            int node=q.front().first;
-            int parent=q.front().second;
-            q.pop();
-            for(auto it:adj[node])
+            
+            if(!vis[adjacentnode])
             {
-                if(!vis[it])
-                {
-                    vis[it]=1;
-                    q.push({it,node});
-                    
-                    
-                }
-                else {
-                    if(parent!=it) return true;
-                    
-                }
+                if(detect(adjacentnode,adj,vis,node)) return true;
+                
+            }
+            else if(parent!=adjacentnode) return true;
+        }
+        return false;
+        
+    }  
+    public:
+    // Function to detect cycle in an undirected graph.
+    bool isCycle(int V, vector<int> adj[]) {
+        vector<int>vis(V,0);
+        for(int i=0;i<V;i++)
+        {
+            if(!vis[i])
+            {
+                if(detect(i,adj,vis,-1)) return true;
                 
             }
             
         }
         return false;
-        
-        
-    }
-  public:
-    // Function to detect cycle in an undirected graph.
-    bool isCycle(int V, vector<int> adj[]) {
-        
-       //adjacency list given to us
-       vector<int>vis(V,0);
-       for(int i=0;i<V;i++)
-       {
-           if(!vis[i]){
-               if(detect(i,adj,vis)) return true;
-           }
-           
-       }
-       return false;
-       
-      
-       
-       
+
     }
 };
 
