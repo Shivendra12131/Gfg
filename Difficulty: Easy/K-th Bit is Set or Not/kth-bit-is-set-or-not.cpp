@@ -17,9 +17,10 @@ class Solution
     {
         // Your code here
         // It can be a one liner logic!! Think of it!!
-         int bit=n>>k;
-        return bit&1;
+        if((n&(1<<k))>0) return 1;
+        return 0;
     }
+    
 };
 
 //{ Driver Code Starts.
